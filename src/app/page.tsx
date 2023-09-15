@@ -1,8 +1,12 @@
-
 export default function Home() {
   return (
-    <div>
-      Homepage
-    </div>
-  )
+    <>
+      <header id="hero_header" className=""></header>
+      <main id="movies">
+        <section></section>
+      </main>
+
+      <footer></footer>
+    </>
+  );
 }
