@@ -24,7 +24,7 @@ export default function TopMovies() {
     <section className="p-20">
       <div className=" flex items-center gap-4 pb-14">
         <h1 className="text-2xl">Featured Movie</h1>
-        <span className="ml-auto font-normal text-red-500" children="See more >" />
+        <span className="ml-auto font-normal text-[#BE123C]" children="See more >" />
       </div>
       <div className="grid gap-x-14 gap-y-20 grid-cols-4">
         {top10Movies.map((movie) => {
@@ -42,7 +42,7 @@ const MovieCard = (props: Partial<movies>) => {
     <div className="col-span-1" key={props.id}>
       <div className="space-y-4 relative">
         <Image className=" w-full" src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.original_title!} width={230} height={230} />
-        <div className="text-gray-500 px-2">USA {props.release_date?.slice(0, 3)}</div>
+        <div className="text-gray-500 px-2">USA, {props.release_date?.slice(0, 4)}</div>
         <div className="text-lg px-2">{props.original_title}</div>
         <div className="flex gap-2 items-center font-normal px-2">
           <Image src={imdb} alt="imdb" />
