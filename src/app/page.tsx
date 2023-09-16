@@ -40,7 +40,7 @@ export default function Home() {
         </div>
 
         <div className="w-1/4 my-20 space-y-4 ">
-          <div className="text-4xl"> {posterMovieData.original_title} </div>
+          <div className="text-4xl"> {posterMovieData.title} </div>
           <div className="flex gap-2 items-center font-normal px-2">
             <Image src={imdb} alt="imdb" />
             <span>{(posterMovieData.vote_average! * 10).toFixed(1)} / 100</span>

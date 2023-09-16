@@ -24,7 +24,7 @@ export default function TopMovies() {
     <section className="p-20">
       <div className=" flex items-center gap-4 pb-14">
         <h1 className="text-2xl">Featured Movie</h1>
-        <span className="ml-auto font-normal text-[#BE123C]" children="See more >" />
+        <span className="ml-auto font-normal text-[#BE123C]">{"See more >"}</span>
       </div>
       <div className="grid gap-x-14 gap-y-20 grid-cols-4">
         {top10Movies.map((movie) => {
@@ -39,11 +39,19 @@ const MovieCard = (props: Partial<movies>) => {
   const genres = props.genre_ids!.map((genre_id) => movies_genres.find(({ id: dictId }) => dictId === genre_id)?.name);
 
   return (
-    <div className="col-span-1" key={props.id}>
+    <div className="col-span-1" key={props.id} data-testid="movie-card">
       <div className="space-y-4 relative">
-        <Image className=" w-full" src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.original_title!} width={230} height={230} />
-        <div className="text-gray-500 px-2">USA, {props.release_date?.slice(0, 4)}</div>
-        <div className="text-lg px-2">{props.original_title}</div>
+        <Image data-testid="movie-poster" className=" w-full" src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.title!} width={230} height={230} />
+        <div className="text-gray-500 px-2">
+          USA,
+          <span data-testid="movie-release-date" className="hidden">
+            {props.release_date}
+          </span>
+          <span>{props.release_date?.slice(0, 4)}</span>
+        </div>
+        <div className="text-lg px-2" data-testid="movie-title">
+          {props.title}
+        </div>
         <div className="flex gap-2 items-center font-normal px-2">
           <Image src={imdb} alt="imdb" />
           <span>{(props.vote_average! * 10).toFixed(1)} / 100</span>
