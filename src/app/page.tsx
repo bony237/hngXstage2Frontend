@@ -1,22 +1,16 @@
+import TopMovies from "@/components/TopMovies";
 import { faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons/faTwitter";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons/faYoutube";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 
 export default function Home() {
-  // async function getMoviesData(){
-  //   const res = await fetch("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1")
-  // }
-
   return (
     <div className="font-bold flex flex-col h-screen">
       <header id="hero_header" className=""></header>
       <main id="movies">
-        <section className="grid gap-4 grid-cols-4">
-          <div className="col-span-1">{/* <Image src={"https://picsumlorem.com/400"}  /> */}</div>
-        </section>
+        <TopMovies />
       </main>
 
       <footer className="flex flex-col items-center pb-14 w-full space-y-4 mt-auto ">
