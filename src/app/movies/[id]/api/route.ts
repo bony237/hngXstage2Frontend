@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+export async function GET(request:Request){
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+    const TMDBTOKEN = process.env.TMDBTOKEN;
 
-export async function GET(id: string) {
-  const TMDBTOKEN = process.env.TMDBTOKEN;
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, { headers: { Authorization: `Bearer ${TMDBTOKEN}` } })
 
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, { headers: { Authorization: `Bearer ${TMDBTOKEN}` } });
+    const movie = await res.json();
 
-  return await res.json();
-
-  //   return NextResponse.json({ movie });
+    return movie;
 }

@@ -1,4 +1,4 @@
-export type movies = {
+export type movie = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[]; // > 0
@@ -19,7 +19,7 @@ export type movies = {
 
 export type dataTopMovieTMDB_type = {
   page: number; // > 0
-  results: movies[];
+  results: movie[];
   total_pages: number; // > 0
   total_results: number; // > 0
 };
@@ -27,6 +27,18 @@ export type dataTopMovieTMDB_type = {
 export const fetchTopMovies = async (): Promise<dataTopMovieTMDB_type> => {
   const TMDBTOKEN = process.env.NEXT_PUBLIC_TMDBTOKEN;
   const res = await fetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1", { headers: { Authorization: `Bearer ${TMDBTOKEN}` } });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+};
+
+export const fetchMovieDetails = async (id:string): Promise<movie> => {
+  const TMDBTOKEN = process.env.NEXT_PUBLIC_TMDBTOKEN;
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, { headers: { Authorization: `Bearer ${TMDBTOKEN}` } });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

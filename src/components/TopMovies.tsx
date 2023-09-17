@@ -1,5 +1,5 @@
 "use client";
-import { dataTopMovieTMDB_type, fetchTopMovies, movies } from "@/services/movies";
+import { dataTopMovieTMDB_type, fetchTopMovies, movie } from "@/services/movies";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import imdb from "@/images/imdb.png";
@@ -10,7 +10,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 export default function TopMovies() {
-  const [top10Movies, setTop10Movies] = useState<movies[]>([]);
+  const [top10Movies, setTop10Movies] = useState<movie[]>([]);
 
   useEffect(() => {
     fetchData();
@@ -36,7 +36,7 @@ export default function TopMovies() {
   );
 }
 
-const MovieCard = (props: Partial<movies>) => {
+const MovieCard = (props: Partial<movie>) => {
   const genres = props.genre_ids!.map((genre_id) => movies_genres.find(({ id: dictId }) => dictId === genre_id)?.name);
 
   return (

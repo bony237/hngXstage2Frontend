@@ -1,4 +1,4 @@
-import { movies } from "@/services/movies";
+import { fetchMovieDetails, movie } from "@/services/movies";
 import { GET } from "./api/route";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,8 +8,8 @@ import { faDotCircle } from "@fortawesome/free-solid-svg-icons/faDotCircle";
 import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
 import Image from "next/image";
 
-export default async function Movie({ params }: { params: { id: string }; movie: any }) {
-  const movie: movies = await GET(params.id);
+export default async function Movie({ params }: { params: {id: string} }) {
+  const movie: movie = await fetchMovieDetails(params.id);
 
   return (
     <div className="col-span-9 p-8">
@@ -57,9 +57,9 @@ export default async function Movie({ params }: { params: { id: string }; movie:
         <div className="grid grid-cols-3 gap-2">
           <div className="col-span-2 space-y-4">
             <div data-testid="movie-overview">{movie.overview}</div>
-            <div>Director : ???</div>
-            <div> Writers : ???</div>
-            <div> Stars : ???</div>
+            <div>Director : <span className="text-[#BE123C]">???</span></div>
+            <div> Writers : <span className="text-[#BE123C]">???</span></div>
+            <div> Stars : <span className="text-[#BE123C]">???</span></div>
             {/* <div> Writers : ???</div> */}
           </div>
           <div className="col-span-1">...</div>
