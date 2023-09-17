@@ -14,7 +14,7 @@ export default async function Movie({ params }: { params: {id: string} }) {
   return (
     <div className="col-span-9 p-8">
       {/* video poster */}
-      <div className="h-64 rounded-3xl shadow-sm flex items-center justify-center relative overflow-hidden">
+      <div className="h-96 rounded-3xl shadow-sm flex items-center justify-center relative overflow-hidden">
         <Image src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`} alt={movie.title} fill className="absolute -z-10" objectFit="cover" />
         <div className="text-white  flex flex-col justify-center items-center z-10">
           <span className=" bg-slate-200/50 rounded-full flex justify-center items-center h-20 w-20">
@@ -38,7 +38,7 @@ export default async function Movie({ params }: { params: {id: string} }) {
           <FontAwesomeIcon width={4} icon={faDotCircle} />
           <span>PG-13</span>
           <FontAwesomeIcon width={4} icon={faDotCircle} />
-          <span data-testid="movie-title">
+          <span>
             {moment.duration(movie.runtime!, "minute").hours()}h {movie.runtime! % 60}m
           </span>
           &nbsp;
