@@ -4,6 +4,7 @@ export type movies = {
   genre_ids: number[]; // > 0
   id: number; // > 0
   original_language: string;
+  overview: string;
   original_title: string;
   popularity: number;
   poster_path: string;
@@ -12,6 +13,8 @@ export type movies = {
   video: boolean;
   vote_average: number;
   vote_count: number; // > 0
+  runtime?: number; // > 0
+  genres?: { id: number; name: string }[];
 };
 
 export type dataTopMovieTMDB_type = {

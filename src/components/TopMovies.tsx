@@ -7,6 +7,7 @@ import apple_icon from "@/images/apple_icon.png";
 import movies_genres from "@/fixtures/movies_genres.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function TopMovies() {
   const [top10Movies, setTop10Movies] = useState<movies[]>([]);
@@ -39,35 +40,37 @@ const MovieCard = (props: Partial<movies>) => {
   const genres = props.genre_ids!.map((genre_id) => movies_genres.find(({ id: dictId }) => dictId === genre_id)?.name);
 
   return (
-    <div className="col-span-1" key={props.id} data-testid="movie-card">
-      <div className="space-y-4 relative">
-        <Image data-testid="movie-poster" className=" w-full" src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.title!} width={230} height={230} />
-        <div className="text-gray-500 px-2">
-          USA,
-          <span data-testid="movie-release-date" className="hidden">
-            {props.release_date}
-          </span>
-          <span>{props.release_date?.slice(0, 4)}</span>
-        </div>
-        <div className="text-lg px-2" data-testid="movie-title">
-          {props.title}
-        </div>
-        <div className="flex gap-2 items-center font-normal px-2">
-          <Image src={imdb} alt="imdb" />
-          <span>{(props.vote_average! * 10).toFixed(1)} / 100</span>
-          <div className="ml-auto flex items-center gap-2">
-            <Image src={apple_icon} alt="popularity" />
-            <span> {Math.round(props.popularity!)}% </span>
+    <Link href={`/movies/${props.id}`} className="col-span-1" key={props.id} data-testid="movie-card">
+      <div>
+        <div className="space-y-4 relative">
+          <Image data-testid="movie-poster" className=" w-full" src={`https://image.tmdb.org/t/p/original${props.poster_path}`} alt={props.title!} width={230} height={230} />
+          <div className="text-gray-500 px-2">
+            USA,
+            <span data-testid="movie-release-date" className="hidden">
+              {props.release_date}
+            </span>
+            <span>{props.release_date?.slice(0, 4)}</span>
+          </div>
+          <div className="text-lg px-2" data-testid="movie-title">
+            {props.title}
+          </div>
+          <div className="flex gap-2 items-center font-normal px-2">
+            <Image src={imdb} alt="imdb" />
+            <span>{(props.vote_average! * 10).toFixed(1)} / 100</span>
+            <div className="ml-auto flex items-center gap-2">
+              <Image src={apple_icon} alt="popularity" />
+              <span> {Math.round(props.popularity!)}% </span>
+            </div>
+          </div>
+          <div className="text-gray-500 capitalize px-2"> {genres.join(", ")} </div>
+          <div className="absolute top-0 py-2 px-6 flex items-center w-full">
+            <span className=" bg-slate-200/50 px-2 py-1 rounded-full">TV SERIES</span>
+            <span className=" bg-slate-200/50 text-slate-200 p-2 rounded-full ml-auto">
+              <FontAwesomeIcon width={20} icon={faHeart} />
+            </span>
           </div>
         </div>
-        <div className="text-gray-500 capitalize px-2"> {genres.join(", ")} </div>
-        <div className="absolute top-0 py-2 px-6 flex items-center w-full">
-          <span className=" bg-slate-200/50 px-2 py-1 rounded-full">TV SERIES</span>
-          <span className=" bg-slate-200/50 text-slate-200 p-2 rounded-full ml-auto">
-            <FontAwesomeIcon width={20} icon={faHeart} />
-          </span>
-        </div>
       </div>
-    </div>
+    </Link>
   );
 };
